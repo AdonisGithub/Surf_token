@@ -1,13 +1,42 @@
-.lpstaking-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+.lpstaking-card-wrapper {
+  position: relative;
+  max-width: 455px;
+  margin: 10px auto;
+  width: 100%;
 
-  p{
-    font-family: Montserrat SemiBold;
-    font-weight: 600;
-    font-size: 30px;
-    color: #FFFFFF;
+  border: 1px solid #62745e;
+  border-radius: 10px;
+
+}
+.lpstaking-card-content {
+  position: relative;
+  max-width: 455px;
+  width: 100%;
+  z-index: 1;
+  padding: 16px;
+
+  .lpstaking-header {
+    display: flex;
+    justify-content: space-between;
+    justify-items: center ;
+    .pair-img{
+      position:relative;
+
+      .first-token-img{
+        width:32px;
+      }
+      .second-token-img{
+        position: absolute;
+        width:80px;
+        top: -15px;
+        left: 5px;
+      }
+    }
+    .header-title1{
+      font-size: 20px;
+      color: white;
+      font-family: 'Montserrat Bold';
+    }
   }
+
 }

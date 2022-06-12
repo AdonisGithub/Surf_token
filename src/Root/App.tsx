@@ -1,6 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import { light, dark } from '@pancakeswap/uikit';
+import { ResetCSS } from '@pancakeswap/uikit';
 import { useAddress, useWeb3Context } from "../hooks";
 import { loadAppDetails } from "../store/slices/app-slice";
 import { loadAccountDetails } from "../store/slices/account-slice";
@@ -67,35 +70,38 @@ function App() {
     if (isAppLoading) return <Loading />;
 
     return (
-        <ViewBase>
-            <Switch>
-                <Route exact path="/dashboard">
-                    <Dashboard />
-                </Route>
+        <ThemeProvider theme={dark}>
+            <ResetCSS />
+            <ViewBase>
+                <Switch>
+                    <Route exact path="/dashboard">
+                        <Dashboard />
+                    </Route>
 
-                <Route exact path="/">
-                    <Redirect to="/dashboard" />
-                </Route>
+                    <Route exact path="/">
+                        <Redirect to="/dashboard" />
+                    </Route>
 
-                <Route path="/account">
-                    <Account />
-                </Route>
+                    <Route path="/account">
+                        <Account />
+                    </Route>
 
-                <Route path="/calculator">
-                    <Calculator />
-                </Route>
+                    <Route path="/calculator">
+                        <Calculator />
+                    </Route>
 
-                <Route path="/lpstaking">
-                    <Lpstaking />
-                </Route>
+                    <Route path="/lpstaking">
+                        <Lpstaking />
+                    </Route>
 
-                <Route path="/referral">
-                    <Referral />
-                </Route>
+                    <Route path="/referral">
+                        <Referral />
+                    </Route>
 
-                <Route component={NotFound} />
-            </Switch>
-        </ViewBase>
+                    <Route component={NotFound} />
+                </Switch>
+            </ViewBase>
+        </ThemeProvider>
     );
 }
 
