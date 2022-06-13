@@ -13,6 +13,7 @@ function Referral() {
                                 <Grid item xs={12} sm={12} md={12} lg={12}>
                                     <div className="referral-card-header">    
                                         <p className="referral-card-header-title">Referral</p>
+                                        <p className="referral-card-header-subtitle">Invite your friends to LP Staking.</p>
                                         <p className="referral-card-header-subtitle">Earn rewards 10% SURF-BNB LP Staking Pools rewards of your referrals.</p>
                                     </div>
                                 </Grid>

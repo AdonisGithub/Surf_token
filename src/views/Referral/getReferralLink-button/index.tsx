@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAddress, useWeb3Context } from "../../../hooks";
-import { DEFAULD_NETWORK } from "../../../constants";
+import { DEFAULD_NETWORK, getAddresses } from "../../../constants";
 import { IReduxState } from "../../../store/slices/state.interface";
 import { IPendingTxn } from "../../../store/slices/pending-txns-slice";
 import "./getReferrallink.scss";
@@ -22,7 +22,7 @@ function GetReferralLinkButton() {
     let buttonStyle = {};
 
     if (isConnected) {
-        buttonText = `${window.location.origin}/#/lpstaking?ref=${address}`;
+        buttonText = `${window.location.origin}/#/lpstaking?ref=${btoa(address)}`;
     }
 
     if (pendingTransactions && pendingTransactions.length > 0) {
