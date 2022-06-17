@@ -8,3 +8,4 @@ export * from "./set-all";
 export * from "./token-price";
 export * from "./sleep";
 export * from "./get-rebase-time";
+export * from "./get-lp-allowance";

@@ -4,7 +4,7 @@ import { Text, Flex, LinkExternal, Skeleton } from '@pancakeswap/uikit'
 
 export interface ExpandableSectionProps {
   bscScanAddress?: string
-  totalValueFormatted?: string
+  totalValueFormatted?: number
   addLiquidityUrl?: string
 }
 

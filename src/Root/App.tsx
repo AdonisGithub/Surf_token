@@ -23,8 +23,6 @@ function App() {
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
     const isAppLoaded = useSelector<IReduxState, boolean>(state => !Boolean(state.app.marketPrice));
 
-    const { tokens } = useTokens();
-
     async function loadDetails(whichDetails: string) {
         let loadProvider = provider;
 
@@ -34,11 +32,10 @@ function App() {
 
         if (whichDetails === "account" && address && connected) {
             loadAccount(loadProvider);
+            
             if (isAppLoaded) return;
-
             loadApp(loadProvider);
         }
-
     }
 
     const loadApp = useCallback(
