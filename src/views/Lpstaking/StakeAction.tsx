@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useWeb3Context } from "src/hooks";
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
-import { Button, Flex, Heading, IconButton, AddIcon, MinusIcon, useModal, Modal } from '@pancakeswap/uikit'
+import { Button, Flex, Heading} from '@pancakeswap/uikit'
 import { useLocation } from 'react-router-dom'
 import Balance from './components/Balance'
 import { IAppSlice } from "../../store/slices/app-slice";
@@ -13,8 +13,10 @@ import { getBalanceAmount, getBalanceNumber, getFullDisplayBalance } from 'src/h
 import { Stake, StakeWithReferrer, Withdraw } from "src/store/slices/staking-slice";
 import {isAddress} from "../../helpers/isAddress"
 
-import DepositModal from './components/DepositModal'
-import WithdrawModal from './components/WithdrawModal'
+import {DepositModal1} from './components/DepositModal1'
+import {DepositModal2} from './components/DepositModal2'
+import {WithdrawModal} from './components/WithdrawModal'
+
 
 interface FarmCardActionsProps {
   stakedBalance: BigNumber
@@ -29,18 +31,6 @@ const IconButtonWrapper = styled.div`
     width: 20px;
   }
 `
-interface ModalProps {
-  title: string
-  onDismiss?: () => void
-
-}
-const CustomModal: React.FC<ModalProps> = ({ title, onDismiss, ...props }) => (
-  <Modal title={title} onDismiss={onDismiss} {...props}>
-    <Heading>{title}</Heading>
-    <Button>This button Does nothing</Button>
-  </Modal>
-);
-
 
 const StakeAction: React.FC<FarmCardActionsProps> = ({
   stakedBalance,
@@ -78,42 +68,23 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
     dispatch(Withdraw({networkID:chainID, provider }));
   }
 
+  
   const displayBalance = useCallback(() => {
     const stakedBalanceBigNumber = getBalanceAmount(stakedBalance)
     if (stakedBalanceBigNumber.gt(0) && stakedBalanceBigNumber.lt(0.0001)) {
-      return getFullDisplayBalance(stakedBalance, 18, 15).toLocaleString()
+      // return getFullDisplayBalance(stakedBalance, 18, 15).toLocaleString()
+      return stakedBalanceBigNumber.toLocaleString()
     }
     return stakedBalanceBigNumber.toFixed(3, BigNumber.ROUND_DOWN)
   }, [stakedBalance])
 
-  const [onPresent1] = useModal(<CustomModal title="Modal 1" />);
-
-  const [onPresentDeposit] = useModal(
-     <DepositModal max={tokenBalance} onConfirm={handleStake} tokenName={tokenName} addLiquidityUrl={addLiquidityUrl} /> 
-    );
-  const [onPresentWithdraw] = useModal(
-    <WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={tokenName} />
-  );
-
   const renderStakingButtons = () => {
     return stakedBalance.eq(0) ? (
-      <Button
-        variant="success"
-        onClick={onPresentDeposit}
-      >
-        {'Stake LP'}
-      </Button>
+      <DepositModal1 max={stakedBalance} onConfirm={handleUnstake} tokenName={tokenName} addLiquidityUrl={addLiquidityUrl}/>
     ) : (
       <IconButtonWrapper>
-        <IconButton variant="tertiary" onClick={onPresentWithdraw} mr="6px">
-          <MinusIcon color="primary" width="14px" />
-        </IconButton>
-        <IconButton
-          variant="tertiary"
-          onClick={onPresent1}
-        >
-          <AddIcon color="primary" width="14px" />
-        </IconButton>
+        <WithdrawModal max={stakedBalance} onConfirm={handleStake} tokenName={tokenName} />
+        <DepositModal2 max={stakedBalance} onConfirm={handleUnstake} tokenName={tokenName} addLiquidityUrl={addLiquidityUrl}/>
       </IconButtonWrapper>
     )
   }

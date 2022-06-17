@@ -37,7 +37,7 @@ const ActionCotainer = () => {
       <StakeAction
         stakedBalance={stakedBalance}
         tokenBalance={tokenBalance}
-        tokenName={"LP"}
+        tokenName={""}
         addLiquidityUrl={"https://"}
       />
     ) : (
