@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 import accountReducer from "./slices/account-slice";
 import appReducer from "./slices/app-slice";
 import pendingTransactionsReducer from "./slices/pending-txns-slice";

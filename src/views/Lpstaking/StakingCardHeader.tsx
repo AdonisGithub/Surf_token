@@ -1,19 +1,16 @@
-import React, {useState, useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
 import cakeimg from "../../assets/tokens/CAKE.png";
 import surfimg from "../../assets/tokens/SURF.png";
 import { CoreTag } from '../../components/Tags';
+
 
 import { Tag, Flex, Button } from '@pancakeswap/uikit';
 import "./lpstaking.scss";
 
 
 
-const StakingCardHeader = ({
+const StakingCardHeader = ({ }) => {
 
-}) => {
-
-
-  
   return (
     <>
       <div className="lpstaking-header">
