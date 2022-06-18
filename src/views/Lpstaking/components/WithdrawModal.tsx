@@ -11,8 +11,8 @@ import "./modal.scss";
 
 
 interface WithdrawModalProps {
-  max: BigNumber
-  onConfirm: (amount: string) => void
+  max: number
+  onConfirm: (amount: number) => void
   tokenName?: string
 }
 
@@ -21,28 +21,17 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, max, to
   const closeModal = () => { setIsOpen(false)}
   const openModal = () => {setIsOpen(true)}
 
-  const [val, setVal] = useState('')
+  const [val, setVal] = useState(0)
   const [pendingTx, setPendingTx] = useState(false)
 
-  const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max, 18, 15)
-  }, [max])
-
-  const valNumber = new BigNumber(val)
-  const fullBalanceNumber = new BigNumber(fullBalance)
-
-  const handleChange = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => {
-      if (e.currentTarget.validity.valid) {
-        setVal(e.currentTarget.value.replace(/,/g, '.'))
-      }
-    },
-    [setVal],
-  )
+  const handleChange = (e:any) => {
+    setVal(e.target.value);
+    // console.log(val);
+  };
 
   const handleSelectMax = useCallback(() => {
-    setVal(fullBalance)
-  }, [fullBalance, setVal])
+    setVal(max)
+  }, [max, setVal])
 
   return (
     <div >
@@ -68,7 +57,7 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, max, to
               onSelectMax={handleSelectMax}
               onChange={handleChange}
               value={val}
-              max={fullBalance}
+              max={max}
               symbol={tokenName}
               inputTitle={'SURF-BNB UNSTAKE'}
             />
@@ -78,7 +67,7 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, max, to
                 </Button>
                 <Button
                   width="100%"
-                  disabled={pendingTx || !valNumber.isFinite() || valNumber.eq(0) || valNumber.gt(fullBalanceNumber)}
+                  disabled={pendingTx || !val || val == 0 || val > max}
                   onClick={async () => {
                     setPendingTx(true)
                     try {

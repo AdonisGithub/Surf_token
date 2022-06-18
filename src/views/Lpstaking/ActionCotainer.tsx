@@ -16,12 +16,13 @@ import "./lpstaking.scss";
 const ActionCotainer = () => {
 
   const dispatch = useDispatch();
-  const {connected, connect, address, provider, chainID, checkWrongNetwork} = useWeb3Context(); 
+  const {connected, connect, address, provider, chainID, checkWrongNetwork} = useWeb3Context();
+  const isAccountLoading = useSelector<IReduxState, boolean>(state => state.account.loading); 
   const account = useSelector<IReduxState, IAccountSlice>(state => state.account);
-  const stakedBalance = new BigNumber( account.stakedBalance);
-  const tokenBalance = new BigNumber(account.LPSupply);
-  const approvedBalance =new BigNumber(account.ApprovedLP);
-  const isapproved = address &&  approvedBalance && approvedBalance.gt(0);
+  const stakedBalance = account.stakedBalance;
+  // const tokenBalance = new BigNumber(account.LPSupply);
+  const approvedBalance =account.ApprovedLP;
+  const isapproved = !isAccountLoading &&  approvedBalance && approvedBalance >0;
   const [requestedApproval, setRequestedApproval] = useState(false)
 
   
@@ -36,9 +37,9 @@ const ActionCotainer = () => {
     return isapproved ? (
       <StakeAction
         stakedBalance={stakedBalance}
-        tokenBalance={tokenBalance}
+        approvedBalance={approvedBalance}
         tokenName={""}
-        addLiquidityUrl={"https://"}
+        addLiquidityUrl={"https://pancakeswap.finance/add/BNB/0x6Cbd8ECaF789324233039FDB8711a29f3f8d0a61"}
       />
     ) : (
       <Button variant="success" width="100%" marginTop="8px" disabled={requestedApproval}  onClick={handleApprove} >Approve contract</Button>

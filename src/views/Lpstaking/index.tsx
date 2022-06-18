@@ -36,9 +36,9 @@ function Lpstaking() {
                     />
                     <ExpandingWrapper expanded={showExpandableSection}>
                         <DetailsSection
-                            bscScanAddress={"https://testnet.bscscan.com/address/0x3D3c4eE5aAfFe1603a32fb468C9E9Ecb18221528"}
+                            bscScanAddress={"https://bscscan.com/address/0x6Cbd8ECaF789324233039FDB8711a29f3f8d0a61"}
                             totalValueFormatted={totalLP}
-                            addLiquidityUrl={"https://pancakeswap.info/pool/"}
+                            addLiquidityUrl={"https://pancakeswap.finance/add/BNB/0x6Cbd8ECaF789324233039FDB8711a29f3f8d0a61"}
                         />
                     </ExpandingWrapper>
                 </div>

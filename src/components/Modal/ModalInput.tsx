@@ -4,12 +4,12 @@ import { Text, Button, Input, InputProps, Flex, Link } from '@pancakeswap/uikit'
 import { BigNumber } from 'bignumber.js'
 
 interface ModalInputProps {
-  max: string
+  max: number
   symbol: string
   onSelectMax?: () => void
   onChange: (e: React.FormEvent<HTMLInputElement>) => void
   placeholder?: string
-  value: string
+  value: number
   addLiquidityUrl?: string
   inputTitle?: string
   decimals?: number
@@ -67,11 +67,11 @@ const ModalInput: React.FC<ModalInputProps> = ({
   inputTitle,
   decimals = 18,
 }) => {
-  const isBalanceZero = max === '0' || !max
+  const isBalanceZero = max == 0 || !max
 
-  const displayBalance = (balance: string) => {
+  const displayBalance = (balance: number) => {
     if (isBalanceZero) {
-      return '0'
+      return 0
     }
     const balanceBigNumber = new BigNumber(balance)
     if (balanceBigNumber.gt(0) && balanceBigNumber.lt(0.0001)) {
@@ -85,7 +85,7 @@ const ModalInput: React.FC<ModalInputProps> = ({
       <StyledTokenInput isWarning={isBalanceZero}>
         <Flex justifyContent="space-between" pl="16px">
           <Text fontSize="14px">{inputTitle}</Text>
-          <Text fontSize="14px">{displayBalance(max)}</Text>
+          <Text fontSize="14px">{max}</Text>
         </Flex>
         <Flex alignItems="flex-end" justifyContent="space-between">
           <StyledInput

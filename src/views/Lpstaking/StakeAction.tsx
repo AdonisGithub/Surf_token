@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useWeb3Context } from "src/hooks";
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
-import { Button, Flex, Heading} from '@pancakeswap/uikit'
+import { Flex, Heading} from '@pancakeswap/uikit'
 import { useLocation } from 'react-router-dom'
 import Balance from './components/Balance'
 import { IAppSlice } from "../../store/slices/app-slice";
@@ -19,8 +19,8 @@ import {WithdrawModal} from './components/WithdrawModal'
 
 
 interface FarmCardActionsProps {
-  stakedBalance: BigNumber
-  tokenBalance: BigNumber
+  stakedBalance: number
+  approvedBalance: number
   tokenName: string
   addLiquidityUrl: string
 }
@@ -34,17 +34,17 @@ const IconButtonWrapper = styled.div`
 
 const StakeAction: React.FC<FarmCardActionsProps> = ({
   stakedBalance,
-  tokenBalance,
+  approvedBalance,
   tokenName,
   addLiquidityUrl,
 }) => {
 
   const {connected, connect, address, provider, chainID, checkWrongNetwork} = useWeb3Context(); 
-  const location = useLocation();
   const dispatch = useDispatch();
 
   const app = useSelector<IReduxState, IAppSlice>(state => state.app);
-  const lpPrice = new BigNumber(app.LPPrice);
+  const lpPrice = app.LPPrice;
+  // const addStakingBalance =new BigNumber(approvedBalance - stakedBalance);
 
   //*******************************referrer address*****************************//
   const { pathname, search } = useLocation();
@@ -56,7 +56,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
       }
   }, [referrer]);
 
-  const handleStake = async (amount: string) => {
+  const handleStake = async (amount: number) => {
     if(referrer)
       dispatch(StakeWithReferrer({address, networkID:chainID, provider, amount, referrer}));
     else
@@ -64,27 +64,29 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
   }
 
 
-  const handleUnstake = async () => {
-    dispatch(Withdraw({networkID:chainID, provider }));
+  const handleUnstake = async (amount: number) => {
+    dispatch(Withdraw({networkID:chainID, provider, amount }));
   }
 
   
-  const displayBalance = useCallback(() => {
-    const stakedBalanceBigNumber = getBalanceAmount(stakedBalance)
-    if (stakedBalanceBigNumber.gt(0) && stakedBalanceBigNumber.lt(0.0001)) {
-      // return getFullDisplayBalance(stakedBalance, 18, 15).toLocaleString()
-      return stakedBalanceBigNumber.toLocaleString()
-    }
-    return stakedBalanceBigNumber.toFixed(3, BigNumber.ROUND_DOWN)
-  }, [stakedBalance])
+  // const displayBalance = useCallback(() => {
+  //   const stakedBigNum = new BigNumber(stakedBalance);
+  //   const stakedBalanceBigNumber = getBalanceAmount(stakedBigNum)
+  //   if (stakedBalanceBigNumber.gt(0) && stakedBalanceBigNumber.lt(0.001)) {
+  //     // return getFullDisplayBalance(stakedBalance, 18, 15).toLocaleString()
+  //     return stakedBalanceBigNumber.toLocaleString()
+  //   }
+  //   return stakedBalanceBigNumber.toFixed(3, BigNumber.ROUND_DOWN)
+  // }, [stakedBalance])
+
 
   const renderStakingButtons = () => {
-    return stakedBalance.eq(0) ? (
-      <DepositModal1 max={stakedBalance} onConfirm={handleUnstake} tokenName={tokenName} addLiquidityUrl={addLiquidityUrl}/>
+    return stakedBalance == 0 ? (
+      <DepositModal1 max={approvedBalance} onConfirm={handleStake} tokenName={tokenName} addLiquidityUrl={addLiquidityUrl}/>
     ) : (
       <IconButtonWrapper>
-        <WithdrawModal max={stakedBalance} onConfirm={handleStake} tokenName={tokenName} />
-        <DepositModal2 max={stakedBalance} onConfirm={handleUnstake} tokenName={tokenName} addLiquidityUrl={addLiquidityUrl}/>
+        <WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={tokenName} />
+        <DepositModal2 max={approvedBalance-stakedBalance} onConfirm={handleStake} tokenName={tokenName} addLiquidityUrl={addLiquidityUrl}/>
       </IconButtonWrapper>
     )
   }
@@ -92,13 +94,13 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
   return (
     <Flex justifyContent="space-between" alignItems="center">
       <Flex flexDirection="column" alignItems="flex-start">
-        <Heading color={stakedBalance.eq(0) ? 'textDisabled' : 'text'}>{displayBalance()}</Heading>
-        {stakedBalance.gt(0) && lpPrice.gt(0) && (
+        <Heading color={stakedBalance == 0 ? 'textDisabled' : 'text'}>{stakedBalance}</Heading>
+        {stakedBalance >0  && lpPrice >0 && (
           <Balance
             fontSize="12px"
             color="textSubtle"
             decimals={2}
-            value={getBalanceNumber(lpPrice.times(stakedBalance))}
+            value={lpPrice * stakedBalance}
             unit=" USD"
             prefix="~"
           />

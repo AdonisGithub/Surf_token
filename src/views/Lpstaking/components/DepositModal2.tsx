@@ -9,8 +9,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import "./modal.scss";
 
 interface DepositModalProps {
-  max: BigNumber
-  onConfirm: (amount: string) => void
+  max: number
+  onConfirm: (amount: number) => void
   tokenName?: string
   addLiquidityUrl?: string
 }
@@ -20,28 +20,16 @@ export const DepositModal2: React.FC<DepositModalProps> = ({ max, onConfirm, tok
   const closeModal = () => { setIsOpen2(false)}
   const openModal = () => {setIsOpen2(true)}
   
-  const [val, setVal] = useState('')
+  const [val, setVal] = useState(0)
   const [pendingTx, setPendingTx] = useState(false)
 
-  const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max, 18, 15)
-  }, [max])
-
-  const valNumber = new BigNumber(val)
-  const fullBalanceNumber = new BigNumber(fullBalance)
-
-  const handleChange = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => {
-      if (e.currentTarget.validity.valid) {
-        setVal(e.currentTarget.value.replace(/,/g, '.'))
-      }
-    },
-    [setVal],
-  )
+  const handleChange = (e:any) => {
+    setVal(e.target.value)
+  };
 
   const handleSelectMax = useCallback(() => {
-    setVal(fullBalance)
-  }, [fullBalance, setVal])
+    setVal(max)
+  }, [max, setVal])
 
   return (
     <div>
@@ -67,7 +55,7 @@ export const DepositModal2: React.FC<DepositModalProps> = ({ max, onConfirm, tok
               value={val}
               onSelectMax={handleSelectMax}
               onChange={handleChange}
-              max={fullBalance}
+              max={max}
               symbol={tokenName}
               addLiquidityUrl={addLiquidityUrl}
               inputTitle= "SURF-BNB LP STAKE"
@@ -78,7 +66,7 @@ export const DepositModal2: React.FC<DepositModalProps> = ({ max, onConfirm, tok
               </Button>
               <Button
                 width="100%"
-                disabled={pendingTx || !valNumber.isFinite() || valNumber.eq(0) || valNumber.gt(fullBalanceNumber)}
+                disabled={pendingTx || !val || val == 0 || val > max}
                 onClick={async () => {
                   setPendingTx(true)
                   try {
