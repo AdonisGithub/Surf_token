@@ -1,8 +1,11 @@
 .lpstaking-card-wrapper {
   position: relative;
+  display: flex;
+  justify-items: center ;
   max-width: 450px;
   margin: 10px auto;
   width: 100%;
+  z-index: 10;
 
   border: 1px solid #62745e;
   border-radius: 24px;

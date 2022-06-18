@@ -42,25 +42,32 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
     //**************************************** Referral ********************************************//
     let referrerNum = 0; 
     let referrerRewards = 0; 
-
+    // referrerNum = await lpReserveContract.userInfor().referrerNum;
+    // referrerRewards = (await lpReserveContract.userInfor().referrerRewards)/Math.pow(10, 5);
+    // console.log("Acc-referrerNum",referrerNum);
+    // console.log("Acc-referrerRewards", referrerRewards);
     referrerNum = 2;
     referrerRewards = 3.5;
 
     //**************************************** LP ********************************************//
     let lPSupply = 0; 
     let approvedLP = 0; 
-    // approvedLP = (await getApprovedLPAmount(address, networkID, provider))/Math.pow(10, 18);
+    // approvedLP = await getApprovedLPAmount(address, networkID, provider)/Math.pow(10, 18);
     // lPSupply = await lpReserveContract.balanceOf(address)/Math.pow(10, 18);
-    approvedLP = 0.00005;
+    // console.log("Acc-approvedLP", approvedLP);
+    // console.log("Acc-lPSupply", lPSupply);
+    approvedLP = 0.00;
     lPSupply = 0.00005;
 
     //**************************************** Staking ********************************************//
     let pendingReward = 0; 
     let stakedBalance = 0;
     // pendingReward = (await stakingContract.pendingSURFReward(address))/ Math.pow(10, 5);
-    // let stakedBalance = await stakingContract.userInfor(address).amount();
-    pendingReward = 23;
-    stakedBalance = 50000000000000;
+    // stakedBalance = (await stakingContract.userInfor(address).amount)/Math.pow(10, 18);
+    // console.log("Acc-pendingReward", pendingReward);
+    // console.log("Acc-stakedBalance", stakedBalance);
+    pendingReward = 0;
+    stakedBalance = 0.000;
 
     return {
         balances: { surf: ethers.utils.formatUnits(surfBalance, 5) },

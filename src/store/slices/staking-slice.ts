@@ -10,6 +10,7 @@ import { LpReserveContract, StakingContract } from "src/abi";
 import { clearPendingTxn, fetchPendingTxns } from "./pending-txns-slice";
 import { info, success, warning } from "./messages-slice";
 import { loadAccountDetails } from "./account-slice";
+import { Power } from "@material-ui/icons";
 
 
 interface IApproveLP {
@@ -88,7 +89,7 @@ interface IStake {
     address : string;
     networkID: Networks;
     provider: StaticJsonRpcProvider | JsonRpcProvider;
-    amount: string;
+    amount: number;
 } 
 
 export const Stake = createAsyncThunk("Stake", async({address, networkID, provider, amount}: IStake,{dispatch}) => {
@@ -100,8 +101,7 @@ export const Stake = createAsyncThunk("Stake", async({address, networkID, provid
     const signer = provider.getSigner();
     const addresses = getAddresses(networkID);
     const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, signer);
-    let amountToStaking = "0";
-    amountToStaking = BigNumber.from(ethers.utils.parseUnits(amount,18)).toString();
+    const amountToStaking =  BigNumber.from(amount * Math.pow(10, 18));
 
     let approveTx;
     try {
@@ -133,7 +133,7 @@ interface IStakeWithReferrer {
     address : string;
     networkID: Networks;
     provider: StaticJsonRpcProvider | JsonRpcProvider;
-    amount: string;
+    amount: number;
     referrer: string;
 } 
 
@@ -146,8 +146,7 @@ export const StakeWithReferrer = createAsyncThunk("StakeWithReferrer", async({ad
     const signer = provider.getSigner();
     const addresses = getAddresses(networkID);
     const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, signer);
-    let amountToStaking = "0";
-    amountToStaking = BigNumber.from(ethers.utils.parseUnits(amount,18)).toString();
+    const amountToStaking =  BigNumber.from(amount * Math.pow(10, 18));
 
     let approveTx;
     try {
@@ -176,15 +175,17 @@ export const StakeWithReferrer = createAsyncThunk("StakeWithReferrer", async({ad
 interface IWithdraw {
     networkID: Networks;
     provider: StaticJsonRpcProvider | JsonRpcProvider;
+    amount: number;
 } 
-export const Withdraw = createAsyncThunk("withdraw", async({networkID, provider }:IWithdraw, {dispatch}) => {
+export const Withdraw = createAsyncThunk("withdraw", async({networkID, provider, amount }:IWithdraw, {dispatch}) => {
     const signer = provider.getSigner();
     const addresses = getAddresses(networkID);
     const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, signer);
+    const amountToUnstaking =  BigNumber.from(amount * Math.pow(10, 18));
     let approveTx;
     try {
         const gasPrice = await  getGasPrice(provider);        
-        approveTx = await stakingContract.withdraw({gasPrice});
+        approveTx = await stakingContract.withdraw(amountToUnstaking, {gasPrice});
         dispatch(
             fetchPendingTxns({
                 txnHash: approveTx.hash,

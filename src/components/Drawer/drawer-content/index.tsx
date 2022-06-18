@@ -111,7 +111,7 @@ function NavContent() {
                         >
                             <div className="dapp-menu-item">
                                 <SvgIcon viewBox="0 0 18 18"  component={DashboardIcon} />
-                                <p>LP Staking</p>
+                                <p>Hyper Wave</p>
                             </div>
                         </Link>
                         <Link

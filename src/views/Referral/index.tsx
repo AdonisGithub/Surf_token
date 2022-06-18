@@ -10,6 +10,7 @@ import "./referral.scss";
 
 function Referral() {
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
+    const isAccountLoading = useSelector<IReduxState, boolean>(state => state.account.loading);
     const app = useSelector<IReduxState, IAppSlice>(state => state.app);
     const account = useSelector<IReduxState, IAccountSlice>(state => state.account);
     return (
@@ -33,14 +34,14 @@ function Referral() {
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={6} md={6} lg={6}>
                                         <div className="referral-card-apy">
-                                            <p className="referral-card-metrics-title">Total Referrals</p>
-                                            <p className="referral-card-metrics-value">{isAppLoading ? <Skeleton width="100px" /> : `${trim(app.referrerNum, 2)}` }</p>
+                                            <p className="referral-card-metrics-title">Total Referrers</p>
+                                            <p className="referral-card-metrics-value">{isAppLoading ? <Skeleton width={50} height={30} /> : `${trim(app.referrerNum, 2)}` }</p>
                                         </div>
                                     </Grid>
                                     <Grid item xs={12} sm={6} md={6} lg={6}>
                                         <div className="referral-card-tvl">
                                             <p className="referral-card-metrics-title">Total Referral Rewards</p>
-                                            <p className="referral-card-metrics-value">{isAppLoading ? <Skeleton width="100px" /> : `${trim(app.referrerRewards, 2)}`} SURF </p>
+                                            <p className="referral-card-metrics-value">{isAppLoading ? <Skeleton width={50} height={30} /> : `${trim(app.referrerRewards, 2)}`} SURF </p>
                                         </div>
                                     </Grid>
                                 </Grid>
@@ -51,14 +52,14 @@ function Referral() {
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={6} md={6} lg={6}>
                                         <div className="referral-card-apy">
-                                            <p className="referral-card-metrics-title">Your Referrals</p>
-                                            <p className="referral-card-metrics-value">{trim(account.referrerNum, 2)}</p>
+                                            <p className="referral-card-metrics-title">Your Referrers</p>
+                                                <p className="referral-card-metrics-value">{isAccountLoading ? <Skeleton width={50} height={30} /> : trim(account.referrerNum, 2)}</p>
                                         </div>
                                     </Grid>
                                     <Grid item xs={12} sm={6} md={6} lg={6}>
                                         <div className="referral-card-tvl">
                                             <p className="referral-card-metrics-title">Your Referral Rewards</p>
-                                            <p className="referral-card-metrics-value">{trim(account.referrerRewards, 2)} SURF</p>
+                                            <p className="referral-card-metrics-value">{isAccountLoading ? <Skeleton width={50} height={30} /> : trim(account.referrerRewards, 2)}SURF</p>
                                         </div>
                                     </Grid>
                                 </Grid>

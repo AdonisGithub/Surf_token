@@ -1,32 +1,30 @@
 import BigNumber from 'bignumber.js'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, {useCallback, useMemo, useState } from 'react'
 import { ModalActions, ModalInput } from 'src/components/Modal'
 import { getFullDisplayBalance } from 'src/helpers/formatBalance'
-import { Button, IconButton, MinusIcon, LinkExternal } from '@pancakeswap/uikit'
+import { Button, LinkExternal } from '@pancakeswap/uikit'
 import Fade from '@material-ui/core/Fade';
 import { Modal} from "@material-ui/core";
 import Backdrop from '@material-ui/core/Backdrop';
 
 import "./modal.scss";
-
-
-interface WithdrawModalProps {
+interface DepositModalProps {
   max: number
   onConfirm: (amount: number) => void
   tokenName?: string
+  addLiquidityUrl?: string
 }
 
-export const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, max, tokenName = '' }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const closeModal = () => { setIsOpen(false)}
-  const openModal = () => {setIsOpen(true)}
-
+export const DepositModal1: React.FC<DepositModalProps> = ({ max, onConfirm, tokenName = '', addLiquidityUrl }) => {
+  const [isOpen1, setIsOpen1] = useState(false);
+  const closeModal = () => { setIsOpen1(false)}
+  const openModal = () => {setIsOpen1(true)}
+  
   const [val, setVal] = useState(0)
   const [pendingTx, setPendingTx] = useState(false)
 
   const handleChange = (e:any) => {
-    setVal(e.target.value);
-    // console.log(val);
+    setVal(e.target.value)
   };
 
   const handleSelectMax = useCallback(() => {
@@ -34,13 +32,13 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, max, to
   }, [max, setVal])
 
   return (
-    <div >
-      <IconButton variant="tertiary" onClick={openModal} mr="6px">
-        <MinusIcon color="primary" width="14px" />
-      </IconButton>
+    <div>
+      <Button variant="success" onClick={openModal}> 
+        Stake LP
+      </Button>
       <Modal
         className="modal"         
-        open={isOpen} 
+        open={isOpen1} 
         onClose={closeModal}  
         aria-labelledby="modal-modal-title" 
         aria-describedby="modal-modal-description" 
@@ -51,16 +49,17 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, max, to
             timeout: 800,
         }}
       >
-        <Fade in={isOpen}>
-          <div className=' modal-content'> 
+        <Fade in={isOpen1}>
+          <div className='modal-content'>  
             <ModalInput
+              value={val}
               onSelectMax={handleSelectMax}
               onChange={handleChange}
-              value={val}
               max={max}
               symbol={tokenName}
-              inputTitle={'SURF-BNB UNSTAKE'}
-            />
+              addLiquidityUrl={addLiquidityUrl}
+              inputTitle= "SURF-BNB LP STAKE"
+            /> 
               <ModalActions>
                 <Button variant="secondary"  width="100%" onClick={closeModal} disabled={pendingTx}>
                   Cancel
@@ -80,11 +79,15 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, max, to
                   }}
                 >
                   {pendingTx ? 'Pending Confirmation' : 'Confirm'}
-              </Button>
-            </ModalActions>
+                </Button>
+              </ModalActions>
+              <LinkExternal href={addLiquidityUrl} style={{ alignSelf: 'center' }}>
+                {tokenName}
+              </LinkExternal>
           </div>
         </Fade>
       </Modal>
     </div>
   )
 }
+
