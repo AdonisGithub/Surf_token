@@ -27,7 +27,7 @@ const HarvestAction = () => {
     <div className="lpstaking-harvest">
         <div className="lpstaking-earned-value">{isAccountLoading ? <Skeleton width={50} height={30} /> : <>{pendingReward}</>}</div>
         <Button
-          disabled={ connected == false || pendingReward == 0 || pendingTx }
+          disabled={ isAccountLoading || pendingReward == 0 || pendingTx }
           variant="success" 
           onClick={async () => {
             setPendingTx(true);

@@ -91,7 +91,7 @@ export const loadAppDetails = createAsyncThunk(
         const totalLPInPool =pairContract.totalSupply()/Math.pow(10, 18);
         // const lptokenprice = 2 * totalSurfInPool * marketPrice / totalLPInPool;
         // console.log("App-lpPrice", lptokenprice);
-         const lptokenprice = 600000;
+         const lptokenprice = 60;
 
         return {
             totalSupply: totalSupply,

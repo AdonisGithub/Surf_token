@@ -7,7 +7,7 @@ import {
 
 const CoreTag: React.FC<TagProps> = (props) => {
   return (
-    <Tag variant="secondary" outline startIcon={<VerifiedIcon width="18px" color="secondary" mr="4px" />} {...props}>
+    <Tag variant="secondary" outline startIcon={<VerifiedIcon width="18px" color="secondary"/>} {...props}>
       {'Core'}
     </Tag>
   )
