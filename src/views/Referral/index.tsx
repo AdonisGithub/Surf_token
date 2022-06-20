@@ -59,7 +59,7 @@ function Referral() {
                                     <Grid item xs={12} sm={6} md={6} lg={6}>
                                         <div className="referral-card-tvl">
                                             <p className="referral-card-metrics-title">Your Referral Rewards</p>
-                                            <p className="referral-card-metrics-value">{isAccountLoading ? <Skeleton width={50} height={30} /> : trim(account.referrerRewards, 2)}SURF</p>
+                                            <p className="referral-card-metrics-value">{isAccountLoading ? <Skeleton width={50} height={30} /> : trim(account.referrerRewards, 2)} SURF</p>
                                         </div>
                                     </Grid>
                                 </Grid>

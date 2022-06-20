@@ -47,6 +47,7 @@
 
   .lpstaking-apr {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     justify-items: center ;
     margin-top: 12px;
@@ -104,7 +105,7 @@
     }
   }
   .divider{
-    background-color: rgb(56, 50, 65);;
+    background-color: rgb(56, 50, 65);
     height: 1px;
     margin: 28px auto;
     width: 100%;
