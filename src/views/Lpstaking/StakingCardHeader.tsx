@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import cakeimg from "../../assets/tokens/CAKE.png";
+import bnbimg from "../../assets/tokens/BNB.png";
 import surfimg from "../../assets/tokens/SURF.png";
 import { CoreTag } from '../../components/Tags';
 import { IAppSlice } from "../../store/slices/app-slice";
@@ -17,12 +17,12 @@ const StakingCardHeader = ({ }) => {
     <>
       <div className="lpstaking-header">
         <div className= "pair-img">
-          <img className="first-token-img" src={cakeimg} alt="cake"/>
+          <img className="first-token-img" src={bnbimg} alt="cake"/>
           <img className="second-token-img" src={surfimg} alt="surf"/>
         </div>
         <div>
           <div className="header-title1">
-              CAKE-SURF
+              SURF-BNB
           </div>
           <Flex justifyContent="end">
               <CoreTag />

@@ -6,13 +6,17 @@ import { IAccountSlice } from "../../store/slices/account-slice";
 import { Grid, Zoom } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import GetReferralLinkButton from "./getReferralLink-button";
+import ReferralDataTable from "./ReferralDataTable";
 import "./referral.scss";
+
+
 
 function Referral() {
     const isAppLoading = useSelector<IReduxState, boolean>(state => state.app.loading);
     const isAccountLoading = useSelector<IReduxState, boolean>(state => state.account.loading);
     const app = useSelector<IReduxState, IAppSlice>(state => state.app);
     const account = useSelector<IReduxState, IAccountSlice>(state => state.account);
+
     return (
         <div className="referral-view">
             <Zoom  in={true}>
@@ -64,6 +68,9 @@ function Referral() {
                                     </Grid>
                                 </Grid>
                             </div>
+                        </Grid>
+                        <Grid item >
+                            <ReferralDataTable/>
                         </Grid>
                         <Grid item>
                             <GetReferralLinkButton/>

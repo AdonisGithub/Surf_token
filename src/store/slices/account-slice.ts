@@ -23,6 +23,11 @@ interface IUserAccountDetails {
 
     LPSupply: number;
     ApprovedLP: number;
+    userRerralDetails: {
+        referrerAddress: string;
+        stakingAmount: number;
+        receivedReward: number;
+    }[];
 
     pendingReward: number;
     stakedBalance: number;
@@ -39,16 +44,6 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
     let surfBalance = "0"; 
     surfBalance = await surfContract.balanceOf(address);
 
-    //**************************************** Referral ********************************************//
-    let referrerNum = 0; 
-    let referrerRewards = 0; 
-    // referrerNum = await lpReserveContract.userInfor().referrerNum;
-    // referrerRewards = (await lpReserveContract.userInfor().referrerRewards)/Math.pow(10, 5);
-    // console.log("Acc-referrerNum",referrerNum);
-    // console.log("Acc-referrerRewards", referrerRewards);
-    referrerNum = 2;
-    referrerRewards = 3.5;
-
     //**************************************** LP ********************************************//
     let lPSupply = 0; 
     let approvedLP = 0; 
@@ -59,11 +54,36 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
     approvedLP = 0.00;
     lPSupply = 0.00005;
 
+    //**************************************** Referral ********************************************//
+    let referrerNum = 0; 
+    let referrerRewards = 0; 
+    // referrerNum = await stakingContract.userInfor().referrerNum();
+    // referrerRewards = (await stakingContract.userInfor().referrerRewards())/Math.pow(10, 5);
+    // console.log("Acc-referrerNum",referrerNum);
+    // console.log("Acc-referrerRewards", referrerRewards);
+    referrerNum = 2;
+    referrerRewards = 3.5;
+
+    // userRerralDetails = await stakingContract.userReferralINfo(address);
+    let userRerralDetails = [
+        {
+            referrerAddress: "0x067522f6ef963768Ad49e66a0eC2f9C117990742",
+            stakingAmount :  400000000000,
+            receivedReward :  65545
+        },
+
+        {
+            referrerAddress:  "0x5a0f19cE6eE22De387BF4ff308ecF091A91C3a5E",
+            stakingAmount :  300000000000,
+            receivedReward :  45645
+        }
+    ];
+    
     //**************************************** Staking ********************************************//
     let pendingReward = 0; 
     let stakedBalance = 0;
     // pendingReward = (await stakingContract.pendingSURFReward(address))/ Math.pow(10, 5);
-    // stakedBalance = (await stakingContract.userInfor(address).amount)/Math.pow(10, 18);
+    // stakedBalance = (await stakingContract.userInfor(address).amount())/Math.pow(10, 18);
     // console.log("Acc-pendingReward", pendingReward);
     // console.log("Acc-stakedBalance", stakedBalance);
     pendingReward = 0;
@@ -77,9 +97,11 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
 
         LPSupply: lPSupply,
         ApprovedLP: approvedLP,
+        userRerralDetails: userRerralDetails,
 
         pendingReward: pendingReward,
-        stakedBalance: stakedBalance
+        stakedBalance: stakedBalance,
+
     };
 });
 
@@ -101,9 +123,14 @@ export interface IAccountSlice {
 
     referrerNum: number;
     referrerRewards: number;
-
+    
     LPSupply: number;
     ApprovedLP: number;
+    userRerralDetails: {
+        referrerAddress: string;
+        stakingAmount: number;
+        receivedReward: number;
+    }[];
 
     pendingReward: number;
     stakedBalance: number;
@@ -120,6 +147,13 @@ const initialState = {
 
     LPSupply: 0,
     ApprovedLP: 0,
+    userRerralDetails: [
+        {
+            referrerAddress: "",
+            stakingAmount :  0,
+            receivedReward :  0
+        },
+    ],
 
     pendingReward: 0,
     stakedBalance: 0

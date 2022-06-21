@@ -8,8 +8,9 @@ import { getAddresses } from 'src/constants';
 import { loadAppDetails } from 'src/store/slices/app-slice';
 import { useAddress, useWeb3Context } from 'src/hooks';
 import { loadAccountDetails } from 'src/store/slices/account-slice';
+import { JsonRpcProvider, StaticJsonRpcProvider } from '@ethersproject/providers';
 
-export async function getLastRebasedTime(networkID: Networks, provider: ethers.Signer | ethers.providers.Provider): Promise<number> {
+export async function getLastRebasedTime(networkID: Networks, provider: JsonRpcProvider | StaticJsonRpcProvider): Promise<number> {
     
     const addresses = getAddresses(networkID);
     const surfContract = new ethers.Contract( addresses.SURF_ADDRESS, SurfContract, provider);
