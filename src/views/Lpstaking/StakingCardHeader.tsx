@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import cakeimg from "../../assets/tokens/CAKE.png";
+import bnbimg from "../../assets/tokens/BNB.png";
 import surfimg from "../../assets/tokens/SURF.png";
 import { CoreTag } from '../../components/Tags';
 import { IAppSlice } from "../../store/slices/app-slice";
@@ -17,12 +17,12 @@ const StakingCardHeader = ({ }) => {
     <>
       <div className="lpstaking-header">
         <div className= "pair-img">
-          <img className="first-token-img" src={cakeimg} alt="cake"/>
+          <img className="first-token-img" src={bnbimg} alt="cake"/>
           <img className="second-token-img" src={surfimg} alt="surf"/>
         </div>
         <div>
           <div className="header-title1">
-              CAKE-SURF
+              SURF-BNB
           </div>
           <Flex justifyContent="end">
               <CoreTag />
@@ -33,14 +33,14 @@ const StakingCardHeader = ({ }) => {
       <div className="lpstaking-apr">
         <div className="lpstaking-apr-title">APR:</div>
         <div style={{display: "flex", alignItems:"center"}}>
-          <div className="lpstaking-apr-title" style={{marginRight: "8px"}}>1950%</div>
+          <div className="lpstaking-apr-title" style={{marginRight: "8px"}}>2190%</div>
           <ApyButton
             lpLabel={"GET SURF-BNB LP"}
             lpSymbol={"SURF-BNB LP"}
             addLiquidityUrl={"https://pancakeswap.finance/add/BNB/0x6Cbd8ECaF789324233039FDB8711a29f3f8d0a61"}
             surfPrice={surfPrice}
-            apr={1950}
-            displayApr={"1950"}
+            apr={2190}
+            displayApr={"2190"}
           />
         </div>
       </div>

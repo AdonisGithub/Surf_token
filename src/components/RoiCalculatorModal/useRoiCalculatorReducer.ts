@@ -8,7 +8,7 @@ import { getInterestBreakdown, getPrincipalForInterest, getRoi } from 'src/helpe
  * UI connected to it is merely representation of the data and buttons to trigger actions
  */
 
-const TOKEN_PRECISION = 10
+const TOKEN_PRECISION = 12
 const USD_PRECISION = 2
 
 // Used to track/react which currency user is editing (i.e. USD amount or Token amount)

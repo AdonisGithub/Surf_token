@@ -22,7 +22,7 @@ function GetReferralLinkButton() {
     let buttonStyle = {};
 
     if (isConnected) {
-        buttonText = `${window.location.origin}/#/lpstaking?ref=${btoa(address)}`;
+        buttonText = `${window.location.origin}/#/hyperwave?ref=${btoa(address)}`;
     }
 
     if (pendingTransactions && pendingTransactions.length > 0) {

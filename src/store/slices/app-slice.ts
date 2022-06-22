@@ -54,7 +54,7 @@ export const loadAppDetails = createAsyncThunk(
         const bnbPrice = getTokenPrice("BNB");
         const currentBlock = await provider.getBlockNumber();
         const currentBlockTime = (await provider.getBlock(currentBlock)).timestamp;
-        const lastRebasedTime = await getLastRebasedTime(networkID, provider);
+         const lastRebasedTime = await getLastRebasedTime(networkID, provider);
         // const lastRebasedTime = 1655771467;
         const marketPrice = (await getMarketPrice(networkID, provider)) * bnbPrice;
         const totalSupply = (await surfContract.totalSupply()) / Math.pow(10, 5);
@@ -78,6 +78,13 @@ export const loadAppDetails = createAsyncThunk(
         const sifValue = Number(ethers.utils.formatEther(sifBNBAmount)) * bnbPrice + Number(sifBUSDAmount);
         const currentApy = Math.pow(1 + 0.0001027, 365 * 12 * 24) - 1 ;
 
+        //************************************** LP ********************************************//
+        // const totalSurfInPool = surfContract.balanceOf(addresses.PAIR_ADDRESS)/ Math.pow(10, 5);
+        const totalLPInPool =pairContract.totalSupply()/Math.pow(10, 18);
+        // const lptokenprice = 2 * totalSurfInPool * marketPrice / totalLPInPool;
+        // console.log("App-lpPrice", lptokenprice);
+          const lptokenprice = 2779309934.5944816;
+          
         //******************************** Refferal ****************************************//
         // const referrerNum =  await stakingContract.totalReferrerNum();
         // const referrerRewards = (await stakingContract.totalReferrerRewards())/ Math.pow(10, 5);
@@ -85,13 +92,6 @@ export const loadAppDetails = createAsyncThunk(
         // console.log("App-referrerRewards", referrerRewards);
         const referrerNum = 6;
         const referrerRewards = 9.605;
-
-        //************************************** LP ********************************************//
-        const totalSurfInPool = surfContract.balanceOf(addresses.PAIR_ADDRESS)/ Math.pow(10, 5);
-        const totalLPInPool =pairContract.totalSupply()/Math.pow(10, 18);
-        // const lptokenprice = 2 * totalSurfInPool * marketPrice / totalLPInPool;
-        // console.log("App-lpPrice", lptokenprice);
-         const lptokenprice = 60;
 
         return {
             totalSupply: totalSupply,

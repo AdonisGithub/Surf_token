@@ -103,7 +103,7 @@ function NavContent() {
                         </Link>
                         <Link
                             component={NavLink}
-                            to="/lpstaking"
+                            to="/hyperwave"
                             isActive={(match: any, location: any) => {
                                 return checkPage(location, "lpstaking");
                             }}

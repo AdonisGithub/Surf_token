@@ -87,7 +87,7 @@ function App() {
                         <Calculator />
                     </Route>
 
-                    <Route path="/lpstaking">
+                    <Route path="/hyperwave">
                         <Lpstaking />
                     </Route>
 

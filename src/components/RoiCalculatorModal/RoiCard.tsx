@@ -90,8 +90,8 @@ const RoiCard: React.FC<RoiCardProps> = ({ earningTokenSymbol, calculatorState, 
     setCalculatorMode(CalculatorMode.PRINCIPAL_BASED_ON_ROI)
     setExpectedRoi(
       roiUSD.toLocaleString('en', {
-        minimumFractionDigits: roiUSD > MILLION ? 0 : 2,
-        maximumFractionDigits: roiUSD > MILLION ? 0 : 2,
+        minimumFractionDigits: roiUSD > MILLION ? 1 : 2,
+        maximumFractionDigits: roiUSD > MILLION ? 1 : 2,
       }),
     )
   }
@@ -137,8 +137,8 @@ const RoiCard: React.FC<RoiCardProps> = ({ earningTokenSymbol, calculatorState, 
                 </Text>
                 <RoiDollarAmount fontSize="24px" bold fadeOut={roiUSD > TRILLION}>
                   {roiUSD.toLocaleString('en', {
-                    minimumFractionDigits: roiUSD > MILLION ? 0 : 2,
-                    maximumFractionDigits: roiUSD > MILLION ? 0 : 2,
+                    minimumFractionDigits: roiUSD > MILLION ? 1 : 2,
+                    maximumFractionDigits: roiUSD > MILLION ? 1 : 2,
                   })}
                 </RoiDollarAmount>
               </RoiDisplayContainer>
