@@ -20,7 +20,7 @@ import { IAccountSlice } from "src/store/slices/account-slice";
 const useStyles = makeStyles({
   root: {
     width: '100%',
-    minWidth: 500
+    minWidth: 500,
   },
   container: {
     maxHeight: 400,
@@ -59,8 +59,8 @@ function ReferralDataTable() {
             <TableHead>
               <TableRow>
                 <TableCell align="center" >Address</TableCell>
-                <TableCell align="center" >Staking Amount(LP)</TableCell>
-                <TableCell align="center" >Referral Reward(SURF)</TableCell>
+                <TableCell align="center" >Staking Amount</TableCell>
+                <TableCell align="center" >Referral Reward</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -72,11 +72,11 @@ function ReferralDataTable() {
                     </Link>
                   </TableCell>
                   <TableCell align="center">
-                    {isAccountLoading ? <Skeleton width={100} height={30} /> :userRerralDetails.stakingAmount/Math.pow(10, 18)}
+                    {/* {isAccountLoading ? <Skeleton width={100} height={30} /> :userRerralDetails.stakingAmount/Math.pow(10, 18)} */}
                     <div>{isAccountLoading ? <Skeleton width={100} height={30} /> : `$${trim(Number(userRerralDetails.stakingAmount/Math.pow(10, 18)*lpPrice), 2)}`}</div>
                   </TableCell>
                   <TableCell align="center">
-                    {isAccountLoading ? <Skeleton width={100} height={30} /> :userRerralDetails.receivedReward/Math.pow(10, 5)}
+                    {/* {isAccountLoading ? <Skeleton width={100} height={30} /> :userRerralDetails.receivedReward/Math.pow(10, 5)} */}
                     <div>{isAccountLoading ? <Skeleton width={100} height={30} /> : `$${trim(Number(userRerralDetails.receivedReward/Math.pow(10, 5)*surfPrice), 2)}`}</div>
                   </TableCell>
                 </TableRow>

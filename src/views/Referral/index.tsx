@@ -69,7 +69,7 @@ function Referral() {
                                 </Grid>
                             </div>
                         </Grid>
-                        <Grid item >
+                        <Grid item style={{width: '100%'}} >
                             <ReferralDataTable/>
                         </Grid>
                         <Grid item>

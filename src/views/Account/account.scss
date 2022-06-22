@@ -47,4 +47,26 @@
     }
 }
 
+.data-row-text{
+    font-size: 24px;
+    font-family:"Montserrat Medium";
+    font-weight:"bolder";
+}   
+@media only screen and (min-width: 480px) {
+    .data-row-text{
+        font-size: 20px !important;
+        font-family:"Montserrat Medium";
+        font-weight:"bolder";
+    }
+}
+
+
+@media only screen and (min-width: 640px) {
+    .data-row-text{
+        font-size: 24px !important;
+        font-family:"Montserrat Medium";
+        font-weight:"bolder";
+    }   
+}
+
 

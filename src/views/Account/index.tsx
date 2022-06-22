@@ -31,7 +31,7 @@ const Account = () => {
                             <Paper  className="account-card">
                                 <Box className="data-column">
                                     <Typography >Your Balance</Typography>
-                                    <Typography variant="h5" style={{fontFamily:"Montserrat Medium",color:"#61ce70",fontWeight:"bolder"}}>{isAccountLoading ? <Skeleton  width={50} height={30} /> :`${trim(Number(account.balances.surf) * app.marketPrice,2)}`}</Typography>
+                                    <Typography  style={{fontFamily:"Montserrat Medium",color:"#61ce70",fontWeight:"bolder"}}>{isAccountLoading ? <Skeleton  width={50} height={30} /> :`${trim(Number(account.balances.surf) * app.marketPrice,2)}`}</Typography>
                                     <Typography >{isAccountLoading ? <Skeleton width={50} height={30} /> : <>{account.balances.surf} SURF</>}SURF</Typography>
                                 </Box>
                             </Paper>
@@ -40,7 +40,7 @@ const Account = () => {
                             <Paper  className="account-card">
                                 <Box className="data-column">
                                     <Typography>APY</Typography>
-                                    <Typography variant="h5" style={{fontFamily:"Montserrat Medium",color:"#61ce70",fontWeight:"bolder"}}>
+                                    <Typography  style={{fontFamily:"Montserrat Medium",color:"#61ce70",fontWeight:"bolder"}}>
                                         {new Intl.NumberFormat().format(Number(`${trim(app.currentApy * 100, 2)}`))}%
                                     </Typography>
                                     <Typography>Daily ROI {trim(app.dailyRate * 100,2)}%</Typography>
@@ -51,7 +51,7 @@ const Account = () => {
                             <Paper  className="account-card">
                                 <Box className="data-column">
                                     <Typography>Next Rebase:</Typography>
-                                    <Typography variant="h5" style={{fontFamily:"Montserrat Medium", color:"#61ce70",fontWeight:"bolder"}}>
+                                    <Typography  style={{fontFamily:"Montserrat Medium", color:"#61ce70",fontWeight:"bolder"}}>
                                         {
                                             `00:${rebaseTime[2]}:${rebaseTime[3]}`
                                         }
@@ -64,33 +64,33 @@ const Account = () => {
                 </Zoom>
                 <Zoom in>
                     <Paper className="account-card">
-                        <Box className="data-row">
+                        <Box className="data-row" >
                             <Typography >Current SURF Price</Typography>
-                            <Typography variant="h5" style={{fontFamily:"Montserrat Medium",fontWeight:"bolder"}}>{isAppLoading ? <Skeleton width={50} height={30} /> : <>${trim(app.marketPrice,2)}</>}</Typography>
+                            <Typography   className = "data-row-text">{isAppLoading ? <Skeleton width={50} height={30} /> : <>${trim(app.marketPrice,2)}</>}</Typography>
                         </Box>
                         <Box className="data-row">
                             <Typography>Next Reward Amount</Typography>
-                            <Typography variant="h5" style={{fontFamily:"Montserrat Medium",fontWeight:"bolder"}}>{isAccountLoading ? <Skeleton width={50} height={30} /> : <>{trim(Number(account.balances.surf) * 0.0001027,5)} SURF</>}</Typography>
+                            <Typography  className = "data-row-text">{isAccountLoading ? <Skeleton width={50} height={30} /> : <>{trim(Number(account.balances.surf) * 0.0001027,5)}SURF</>}</Typography>
                         </Box>
                         <Box className="data-row">
                             <Typography>Next Reward Amount USD</Typography>
-                            <Typography variant="h5" style={{fontFamily:"Montserrat Medium",fontWeight:"bolder"}}>{isAccountLoading ? <Skeleton width={50} height={30} /> : <>${trim(Number(account.balances.surf) * 0.0001027 * app.marketPrice,5)} </>}</Typography>
+                            <Typography  className = "data-row-text">{isAccountLoading ? <Skeleton width={50} height={30} /> : <>${trim(Number(account.balances.surf) * 0.0001027 * app.marketPrice,5)} </>}</Typography>
                         </Box>
                         <Box className="data-row">
                             <Typography>Next Reward Yield</Typography>
-                            <Typography variant="h5" style={{fontFamily:"Montserrat Medium",fontWeight:"bolder"}}>{isAppLoading ? <Skeleton width={50} height={30} /> : <>{0.01027}%</>}</Typography>
+                            <Typography  className = "data-row-text">{isAppLoading ? <Skeleton width={50} height={30} /> : <>{0.01027}%</>}</Typography>
                         </Box>
                         <Box className="data-row">
                             <Typography>ROI(1-Day Rate) USD</Typography>
-                            <Typography variant="h5" style={{fontFamily:"Montserrat Medium",fontWeight:"bolder" }}>{isAccountLoading ? <Skeleton width={50} height={30} /> : <>${trim(app.oneDayRate * Number(account.balances.surf) * app.marketPrice,4)}</>}</Typography>
+                            <Typography  className="data-row-text">{isAccountLoading ? <Skeleton width={50} height={30} /> : <>${trim(app.oneDayRate * Number(account.balances.surf) * app.marketPrice,4)}</>}</Typography>
                         </Box>
                         <Box className="data-row">
                             <Typography>ROI(5-Day Rate)</Typography>
-                            <Typography variant="h5" style={{fontFamily:"Montserrat Medium",fontWeight:"bolder"}}>{isAppLoading ? <Skeleton width={50} height={30} /> : <>{trim(app.fiveDayRate * 100,2)}%</>}</Typography>
+                            <Typography  className = "data-row-text">{isAppLoading ? <Skeleton width={50} height={30} /> : <>{trim(app.fiveDayRate * 100,2)}%</>}</Typography>
                         </Box>                        
                         <Box className="data-row">
                             <Typography>ROI(5-Day Rate) USD</Typography>
-                            <Typography variant="h5" style={{fontFamily:"Montserrat Medium",fontWeight:"bolder" }}>{isAccountLoading ? <Skeleton width={50} height={30} /> : <>${trim(app.fiveDayRate * Number(account.balances.surf) * app.marketPrice,4)}</>}</Typography>
+                            <Typography  className="data-row-text">{isAccountLoading ? <Skeleton width={50} height={30} /> : <>${trim(app.fiveDayRate * Number(account.balances.surf) * app.marketPrice,4)}</>}</Typography>
                         </Box>
                     </Paper>
                 </Zoom>

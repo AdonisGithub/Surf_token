@@ -1,7 +1,8 @@
 .ReferralData{
-    overflow-x: "auto";
     border-radius: 10px;
     border: 1px solid rgb(98 116 94);
+    width: 100%;
+    overflow-x: auto;
 }
 
 .MuiTableCell-head {
@@ -40,4 +41,8 @@ th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignCenter{
 }
 a.MuiTypography-root.MuiLink-root.MuiLink-underlineHover.MuiTypography-colorPrimary{
     color: #FFFFFF !important;
+}
+
+.MuiTableContainer-root, .MuiTablePagination-root {
+    overflow: visible !important;
 }
