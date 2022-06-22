@@ -2,6 +2,7 @@ import React from 'react';
 // import { makeStyles } from '@material-ui/core/styles';
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
+import { Link } from "@material-ui/core";
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
@@ -31,12 +32,13 @@ const useStyles = makeStyles({
 function ReferralDataTable() {
   const classes = useStyles();
   const isAccountLoading = useSelector<IReduxState, boolean>(state => state.account.loading);
-  // const app = useSelector<IReduxState, IAppSlice>(state => state.app);
+   const app = useSelector<IReduxState, IAppSlice>(state => state.app);
   const account = useSelector<IReduxState, IAccountSlice>(state =>state.account);
-  // const lpPrice = app.LPPrice;
-  // const surfPrice = app.marketPrice;
+  const lpPrice = app.LPPrice;
+  const surfPrice = app.marketPrice;
   const userRerralDetails = account.userRerralDetails;
-  console.log("Here", userRerralDetails);
+   console.log("LP price", lpPrice);
+   console.log("SURF price", surfPrice);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(3);
@@ -64,9 +66,19 @@ function ReferralDataTable() {
             <TableBody>
               {userRerralDetails.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((userRerralDetails) => (
                 <TableRow key={userRerralDetails.referrerAddress}>
-                  <TableCell align="center" >{isAccountLoading ? <Skeleton width={50} height={30} /> : userRerralDetails.referrerAddress}</TableCell>
-                  <TableCell align="center">{isAccountLoading ? <Skeleton width={50} height={30} /> :userRerralDetails.stakingAmount/Math.pow(10, 18)}</TableCell>
-                  <TableCell align="center">{isAccountLoading ? <Skeleton width={50} height={30} /> :userRerralDetails.receivedReward/Math.pow(10, 5)}</TableCell>
+                  <TableCell align="center" >
+                    <Link href={`https://bscscan.com/address/${userRerralDetails.referrerAddress}`} target="_blank">
+                      {isAccountLoading ? <Skeleton width={100} height={30} /> : userRerralDetails.referrerAddress}
+                    </Link>
+                  </TableCell>
+                  <TableCell align="center">
+                    {isAccountLoading ? <Skeleton width={100} height={30} /> :userRerralDetails.stakingAmount/Math.pow(10, 18)}
+                    <div>{isAccountLoading ? <Skeleton width={100} height={30} /> : `$${trim(Number(userRerralDetails.stakingAmount/Math.pow(10, 18)*lpPrice), 2)}`}</div>
+                  </TableCell>
+                  <TableCell align="center">
+                    {isAccountLoading ? <Skeleton width={100} height={30} /> :userRerralDetails.receivedReward/Math.pow(10, 5)}
+                    <div>{isAccountLoading ? <Skeleton width={100} height={30} /> : `$${trim(Number(userRerralDetails.receivedReward/Math.pow(10, 5)*surfPrice), 2)}`}</div>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

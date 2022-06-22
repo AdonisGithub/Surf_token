@@ -69,11 +69,23 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
         {
             referrerAddress: "0x067522f6ef963768Ad49e66a0eC2f9C117990742",
             stakingAmount :  400000000000,
-            receivedReward :  65545
+            receivedReward :  60860
         },
 
         {
             referrerAddress:  "0x5a0f19cE6eE22De387BF4ff308ecF091A91C3a5E",
+            stakingAmount :  100000000000,
+            receivedReward :  15215
+        },
+
+        {
+            referrerAddress: "0xC9F9d347Ea1aF3C5e86d9d68a184897B2A9f860E",
+            stakingAmount :  500000000000,
+            receivedReward :  76075
+        },
+
+        {
+            referrerAddress:  "0xa42C982B05B873FcaB34a76f01b68070291B6175",
             stakingAmount :  300000000000,
             receivedReward :  45645
         }

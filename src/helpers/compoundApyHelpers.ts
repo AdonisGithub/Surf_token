@@ -25,7 +25,7 @@ export const getInterestBreakdown = ({
 
   // special handling for tokens like tBTC or BIFI where the daily token rewards for $1000 dollars will be less than 0.001 of that token
   // and also cause rounding errors
-  const isHighValueToken = Math.round(earningTokenPrice / 10) > 0
+  const isHighValueToken = Math.round(earningTokenPrice / 100) > 0
   const roundingDecimalsNew = isHighValueToken ? 8 : 5
 
   return DAYS_TO_CALCULATE_AGAINST.map((days) => {
@@ -33,6 +33,7 @@ export const getInterestBreakdown = ({
     // Calculate the starting TOKEN balance with a dollar balance of principalInUSD.
     const principal = principalInUSD / earningTokenPrice
     let interestEarned = principal * aprAsDecimal * (daysAsDecimalOfYear)
+
     return parseFloat(interestEarned.toFixed(roundingDecimalsNew))
 
   })

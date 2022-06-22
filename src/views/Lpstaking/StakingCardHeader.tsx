@@ -33,14 +33,14 @@ const StakingCardHeader = ({ }) => {
       <div className="lpstaking-apr">
         <div className="lpstaking-apr-title">APR:</div>
         <div style={{display: "flex", alignItems:"center"}}>
-          <div className="lpstaking-apr-title" style={{marginRight: "8px"}}>1950%</div>
+          <div className="lpstaking-apr-title" style={{marginRight: "8px"}}>2190%</div>
           <ApyButton
             lpLabel={"GET SURF-BNB LP"}
             lpSymbol={"SURF-BNB LP"}
             addLiquidityUrl={"https://pancakeswap.finance/add/BNB/0x6Cbd8ECaF789324233039FDB8711a29f3f8d0a61"}
             surfPrice={surfPrice}
-            apr={1950}
-            displayApr={"1950"}
+            apr={2190}
+            displayApr={"2190"}
           />
         </div>
       </div>

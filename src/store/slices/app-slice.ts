@@ -54,8 +54,8 @@ export const loadAppDetails = createAsyncThunk(
         const bnbPrice = getTokenPrice("BNB");
         const currentBlock = await provider.getBlockNumber();
         const currentBlockTime = (await provider.getBlock(currentBlock)).timestamp;
-        // const lastRebasedTime = await getLastRebasedTime(networkID, provider);
-         const lastRebasedTime = 1655771467;
+         const lastRebasedTime = await getLastRebasedTime(networkID, provider);
+        // const lastRebasedTime = 1655771467;
         const marketPrice = (await getMarketPrice(networkID, provider)) * bnbPrice;
         const totalSupply = (await surfContract.totalSupply()) / Math.pow(10, 5);
         const circSupply = totalSupply - (await surfContract.balanceOf(addresses.FIREPIT_ADDRESS)) / Math.pow(10,5);
@@ -83,7 +83,7 @@ export const loadAppDetails = createAsyncThunk(
         const totalLPInPool =pairContract.totalSupply()/Math.pow(10, 18);
         // const lptokenprice = 2 * totalSurfInPool * marketPrice / totalLPInPool;
         // console.log("App-lpPrice", lptokenprice);
-          const lptokenprice = 600;
+          const lptokenprice = 2779309934.5944816;
           
         //******************************** Refferal ****************************************//
         // const referrerNum =  await stakingContract.totalReferrerNum();
